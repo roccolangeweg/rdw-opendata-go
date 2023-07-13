@@ -6,6 +6,7 @@ type RegisteredVehicle struct {
 	Brand                                string `json:"merk"`
 	TradeName                            string `json:"handelsbenaming"`
 	ExpirationDateMOT                    string `json:"vervaldatum_apk"`
+	GrossPurchaseTax                     string `json:"bruto_bpm"`
 	DateOfAscription                     string `json:"datum_tenaamstelling"`
 	Interior                             string `json:"inrichting"`
 	NumberOfSeats                        string `json:"aantal_zitplaatsen"`
@@ -23,6 +24,9 @@ type RegisteredVehicle struct {
 	MaximumConstructionSpeed             string `json:"maximum_constructiesnelheid"`
 	NumberOfDoors                        string `json:"aantal_deuren"`
 	NumberOfWheels                       string `json:"aantal_wielen"`
+	NumberOfCylinders                    string `json:"aantal_cilinders"`
+	NumberOfStandingPlaces               string `json:"aantal_staanplaatsen"`
+	CylinderCapacity                     string `json:"cilinderinhoud"`
 	DistanceCentreCouplingToRearVehicle  string `json:"afstand_hart_koppeling_tot_achterzijde_voertuig"`
 	DistanceFrontVehicleToCentreCoupling string `json:"afstand_voorzijde_voertuig_tot_hart_koppeling"`
 	Length                               string `json:"lengte"`
@@ -46,4 +50,8 @@ type RegisteredVehicle struct {
 	MileageJudgementCode                 string `json:"code_toelichting_tellerstandoordeel"`
 	MileageLastRegistrationYear          string `json:"jaar_laatste_registratie_tellerstand"`
 	RegistrationPossible                 string `json:"tenaamstellen_mogelijk"`
+	WaitingForApproval                   string `json:"wacht_op_keuren"`
+	WAMInsured                           string `json:"wam_verzekerd"`
+	LoadingCapacity                      string `json:"laadvermogen"`
+	TypeGasInstallation                  string `json:"soort_gasinstallatie"`
 }

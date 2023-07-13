@@ -19,6 +19,8 @@ type Client struct {
 	client   *http.Client
 	baseURL  *url.URL
 	appToken string
+
+	RegisteredVehicles *RegisteredVehicles
 }
 
 func NewClient(client *http.Client, appToken string) *Client {
@@ -27,7 +29,7 @@ func NewClient(client *http.Client, appToken string) *Client {
 		client = &http.Client{}
 	}
 
-	return &Client{
+	c := &Client{
 		client:   client,
 		appToken: appToken,
 		baseURL: &url.URL{
@@ -35,6 +37,10 @@ func NewClient(client *http.Client, appToken string) *Client {
 			Host:   "opendata.rdw.nl",
 		},
 	}
+
+	c.RegisteredVehicles = NewRegisteredVehicles(c)
+
+	return c
 }
 
 func (c *Client) NewRequest(ctx context.Context, method, relPath string, body, options interface{}) (*http.Request, error) {

@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 
@@ -91,7 +93,7 @@ func (c *Client) NewRequest(ctx context.Context, method, relPath string, body, o
 func (c *Client) Do(req *http.Request, v interface{}) error {
 	resp, err := c.client.Do(req)
 	if err != nil {
-		return err
+		return fmt.Errorf("error executing request: %w", err)
 	}
 
 	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
@@ -101,11 +103,11 @@ func (c *Client) Do(req *http.Request, v interface{}) error {
 			return &AppTokenInvalidError{}
 		}
 
-		// get the error message from the response body
-		var body []byte
-		if _, err := resp.Body.Read(body); err != nil {
-			return err
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return fmt.Errorf("error reading response body: %w", err)
 		}
+
 		return &ApiError{
 			StatusCode: resp.StatusCode,
 			Message:    string(body),

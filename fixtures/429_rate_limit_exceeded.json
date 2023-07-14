@@ -1,0 +1,5 @@
+{
+  "code": "api_limit_exceeded",
+  "error": true,
+  "message": "API limit exceeded"
+}

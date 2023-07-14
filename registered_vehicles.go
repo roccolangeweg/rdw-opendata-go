@@ -2,6 +2,7 @@ package rdw_opendata_go
 
 import (
 	"context"
+	"fmt"
 )
 
 type RegisteredVehicles struct {
@@ -32,7 +33,7 @@ func (r *RegisteredVehicles) List(ctx context.Context, options RegisteredVehicle
 	err = r.client.Do(req, &registeredVehicles)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error while requesting registered vehicles: %w", err)
 	}
 
 	return registeredVehicles, nil

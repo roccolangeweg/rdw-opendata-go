@@ -31,7 +31,9 @@ func TestClient_Do_InvalidToken(t *testing.T) {
 			t.Error("should return an error")
 		}
 
-		if !errors.Is(err, &AppTokenInvalidError{}) {
+		expectedErr := &AppTokenInvalidError{}
+
+		if err.Error() != expectedErr.Error() {
 			t.Errorf("should return an error of type AppTokenInvalidError, returned: %v", err)
 		}
 	})
